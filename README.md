@@ -1,31 +1,32 @@
-# Citizen_science_EEG
-Проект по распознаванию эмоций по ЭЭГ. ВШЭ ФКН 3-курс
+# EEG Emotion Recognition
+#### HSE Computer Science Student's Project
+###### Authors: Soboleva Natalia & Glazkova Ekaterina
 
-Первый этап
+Accurate classification of EEG signals can provide the solution for medical researches of detecting abnormal brain behavior on its early phases in order to threat it. In this study we are looking at this task from slightly another angle -- emotions recognition. We design a joint of convolutional and recurrent neural networks with the usage of autoencoder to compress high dimentionality of the data.
 
-Дедлайн (примерно) (29 ноября или 6 декабря)
+Current project consists of EEG data processing and it's convolution using AutoEncoder + CNN + RNN
 
-Цель: 
+## Pre-processing
+[Report on Data Preprocessing ](https://github.com/nasoboleva/EEG-Emotion-Recognition/wiki/Препроцессинг-данных)
 
-  Научиться работать с данными, установить необходимые библиотеки
+Artifact &mdash; that is the term for all recorded activity that is not of cerebral origin. Artifacts can be divided into two groups: physiologic (arise from other parts of the brain, for example, body) and extraphysiologic (arise from, for example, technical equipment) artifacts.
 
-Данные:
+To extract the most important features of EEG observations pre-processing is necessary. For data processing and visualization [MNE](https://mne-tools.github.io/stable/index.html#) &mdash; open-source Python software for human neurophysiological data including EEG was chosen. In this area there are two main state-of-art methods to process EEG signals:
+Wavelet transform and independent component analysis (ICA).
 
-  https://yadi.sk/d/0PCqBPdk3KLMRa
+## AutoEncoder
+[Report on AutoEncoder](https://github.com/nasoboleva/EEG-Emotion-Recognition/wiki/AutoEncoder)
 
-Задание выполняются на языке Python
+Autoencoder is a neural network which consists of two parts: encoder and decoder, both are neural networks. In the work we create contractive autoencoder. It means that the layer between encoder and decoder has less neurons than an input layer.
 
-Мануал для того, чтобы начать:
+ In our task target representation is the same as input data - it proves that we do not lose any data. Moreover, autoencoder be used for data preprocessing - the aim representation might be data cleared from noise.
 
-  pip install mne
-  
-  import mne
-  
-  raw = mne.io.read_raw_brainvision("/data/resting_state/zavrin_open_eyes_eeg_15021500.vhdr")
-  
-  raw.get_data().shape
-  
-Дальше смотрим:
-  http://martinos.org/mne/stable/auto_tutorials/plot_visualize_raw.html
-  
- Удачи!
+The first autoencoder consists of two fully-connected layers with ReLU activation function.
+
+## Convolutional AutoEncoder
+[Report on Convolutional AutoEncoder](https://github.com/nasoboleva/EEG-Emotion-Recognition/wiki/CNN-AutoEncoder)
+
+ CNNs can find local dependencies and represent higher-level features as compositions of lower-level dependencies.
+Another reason is that CNN is well-suited for the dimensional relevance representations. The main purpose for convolutional neural network is to exploit spatial connections between different features in each signal.
+
+In current work we are planning on using three types of layers: convolutional layers, pooling layers and fully connected layers.
